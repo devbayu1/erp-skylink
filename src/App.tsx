@@ -5,6 +5,11 @@ import Dashboard from '@/pages/Dashboard'
 import Customers from '@/pages/Customers'
 import CustomerDetail from './pages/CustomerDetail'
 import CustomerFormPage from './pages/CustomerFormPage'
+import Quotations from './pages/Quotations'
+import CreateQuotation from './pages/CreateQuotation'
+import QuotationDetail from './pages/QuotationDetail'
+import SiteInvestmentForm from './pages/SiteInvestmentForm'
+import SalesPipeline from './pages/SalesPipeline'
 
 function App() {
   return (
@@ -28,7 +33,12 @@ function App() {
               <Route path="/customers/:id/edit" element={<CustomerFormPage />} />
               
               {/* Placeholder routes - will be created later */}
-              <Route path="/sales" element={<div>Sales & Quotation Page</div>} />
+              <Route path="/quotations" element={<Quotations/>} />
+              <Route path="/quotations/new" element={<CreateQuotation/>} />
+              <Route path="/quotations/:id" element={<QuotationDetail/>} />
+              <Route path="/quotations/:id/si" element={<SiteInvestmentForm/>} />
+              <Route path="/sales/pipeline" element={<SalesPipeline/>} />
+              
               <Route path="/orders" element={<div>Order Management Page</div>} />
               <Route path="/finance" element={<div>Finance Page</div>} />
               <Route path="/deployment" element={<div>Deployment Page</div>} />

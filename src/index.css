@@ -56,4 +56,16 @@
   body {
     @apply bg-white text-gray-900;
   }
+  html {
+    font-size: 14px; /* Default adalah 16px */
+  }
+
+  body {
+    @apply text-sm; /* Tailwind text-sm class */
+  }
+
+  /* Atau langsung set font-size */
+  body {
+    font-size: 0.875rem; /* 14px */
+  }
 }

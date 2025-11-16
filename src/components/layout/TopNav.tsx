@@ -10,24 +10,24 @@ export function TopNav() {
       {/* Left Section - Logo and Menu Items */}
       <div className="flex items-center gap-8">
         <div className="text-white mr-4">
-          <span className="text-xl">ERP</span>
+          <span className="text-xl">Skylink</span>
         </div>
 
-        <div className="flex items-center gap-6">
+        {/* <div className="flex items-center gap-6">
           {menuItems.map((item) => (
             <button key={item} className="text-white hover:text-blue-200 transition-colors">
               {item}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Center - Search Icon */}
-      <div className="flex-1 flex justify-center max-w-md">
+      {/* <div className="flex-1 flex justify-center max-w-md">
         <button className="p-2 text-white hover:text-blue-200 transition-colors">
           <Search className="w-5 h-5" />
         </button>
-      </div>
+      </div> */}
 
       {/* Right Section - Notifications and User */}
       <div className="flex items-center gap-6">
