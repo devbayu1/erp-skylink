@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { PipelineFilters as FilterType } from "../../types/pipeline";
+import type { PipelineFilters as FilterType } from "../../types/pipeline";
 
 interface PipelineFiltersProps {
   filters: FilterType;

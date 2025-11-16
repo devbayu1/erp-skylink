@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "../ui/button";
 import { PipelineCard } from "./PipelineCard";
-import { PipelineStageData } from "../../types/pipeline";
+import type { PipelineStageData } from "../../types/pipeline";
 
 interface PipelineColumnProps {
   stageData: PipelineStageData;

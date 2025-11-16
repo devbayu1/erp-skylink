@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { PipelineStageData } from "../../types/pipeline";
+import type { PipelineStageData } from "../../types/pipeline";
 
 interface ConversionFunnelProps {
   stages: PipelineStageData[];

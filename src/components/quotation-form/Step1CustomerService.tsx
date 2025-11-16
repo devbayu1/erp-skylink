@@ -13,13 +13,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { QuotationFormData, Customer } from "../../types/quotationForm";
+import type { 
+  QuotationFormData, 
+  Customer, 
+  AdditionalService as AdditionalServices 
+} from "../../types/quotationForm";
 
 interface Step1Props {
   formData: QuotationFormData;
   updateFormData: (data: Partial<QuotationFormData>) => void;
 }
 
+// Mock Data
 const mockCustomers: Customer[] = [
   {
     id: "1",
@@ -68,6 +73,34 @@ const servicePlansMobile = [
   "Mobile Priority 5TB",
 ];
 
+// Additional Services List - MOCK DATA
+const additionalServicesList = [
+  {
+    id: "delivery",
+    key: "delivery" as keyof AdditionalServices,
+    label: "Delivery & Installation",
+    description: "(auto-calculate based on location)"
+  },
+  {
+    id: "activation",
+    key: "activation" as keyof AdditionalServices,
+    label: "Activation Service",
+    description: ""
+  },
+  {
+    id: "training",
+    key: "training" as keyof AdditionalServices,
+    label: "Training & Support",
+    description: ""
+  },
+  {
+    id: "warranty",
+    key: "warranty" as keyof AdditionalServices,
+    label: "Extended Warranty",
+    description: ""
+  }
+];
+
 export function Step1CustomerService({ formData, updateFormData }: Step1Props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showCustomerList, setShowCustomerList] = useState(false);
@@ -84,6 +117,7 @@ export function Step1CustomerService({ formData, updateFormData }: Step1Props) {
       phone: customer.phone,
       email: customer.email,
       address: customer.address,
+      customer: customer, // Store full customer object
     });
     setShowCustomerList(false);
     setSearchQuery(customer.name);
@@ -121,17 +155,23 @@ export function Step1CustomerService({ formData, updateFormData }: Step1Props) {
               />
               {showCustomerList && searchQuery && (
                 <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                  {filteredCustomers.map((customer) => (
-                    <button
-                      key={customer.id}
-                      type="button"
-                      className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors border-b border-gray-100 last:border-0"
-                      onClick={() => handleSelectCustomer(customer)}
-                    >
-                      <div className="text-gray-900">{customer.name}</div>
-                      <div className="text-sm text-gray-600">{customer.contactPerson}</div>
-                    </button>
-                  ))}
+                  {filteredCustomers.length > 0 ? (
+                    filteredCustomers.map((customer) => (
+                      <button
+                        key={customer.id}
+                        type="button"
+                        className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors border-b border-gray-100 last:border-0"
+                        onClick={() => handleSelectCustomer(customer)}
+                      >
+                        <div className="text-gray-900 font-medium">{customer.name}</div>
+                        <div className="text-sm text-gray-600">{customer.contactPerson}</div>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="px-4 py-3 text-sm text-gray-500">
+                      No customers found
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -147,7 +187,7 @@ export function Step1CustomerService({ formData, updateFormData }: Step1Props) {
             <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
               <div>
                 <Label className="text-sm text-gray-600">Customer Name</Label>
-                <p className="text-gray-900">{formData.customerName}</p>
+                <p className="text-gray-900 font-medium">{formData.customerName}</p>
               </div>
               <div>
                 <Label className="text-sm text-gray-600">Contact Person</Label>
@@ -163,7 +203,9 @@ export function Step1CustomerService({ formData, updateFormData }: Step1Props) {
               </div>
               <div className="col-span-2">
                 <Label className="text-sm text-gray-600">Address</Label>
-                <p className="text-gray-700 bg-gray-100 p-2 rounded">{formData.address}</p>
+                <p className="text-gray-700 bg-gray-100 p-2 rounded text-sm">
+                  {formData.address}
+                </p>
               </div>
             </div>
           )}
@@ -303,71 +345,39 @@ export function Step1CustomerService({ formData, updateFormData }: Step1Props) {
         </CardContent>
       </Card>
 
-      {/* Section 3: Additional Services */}
+      {/* Section 3: Additional Services - DENGAN LOOPING */}
       <Card className="bg-white shadow-sm rounded-lg">
         <CardHeader>
           <CardTitle className="text-gray-900">Additional Services</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="delivery"
-              checked={formData.additionalServices.delivery}
-              onCheckedChange={(checked) =>
-                updateFormData({
-                  additionalServices: { ...formData.additionalServices, delivery: !!checked },
-                })
-              }
-            />
-            <label htmlFor="delivery" className="text-sm cursor-pointer">
-              Delivery & Installation
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="activation"
-              checked={formData.additionalServices.activation}
-              onCheckedChange={(checked) =>
-                updateFormData({
-                  additionalServices: { ...formData.additionalServices, activation: !!checked },
-                })
-              }
-            />
-            <label htmlFor="activation" className="text-sm cursor-pointer">
-              Activation Service
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="training"
-              checked={formData.additionalServices.training}
-              onCheckedChange={(checked) =>
-                updateFormData({
-                  additionalServices: { ...formData.additionalServices, training: !!checked },
-                })
-              }
-            />
-            <label htmlFor="training" className="text-sm cursor-pointer">
-              Training & Support
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="warranty"
-              checked={formData.additionalServices.warranty}
-              onCheckedChange={(checked) =>
-                updateFormData({
-                  additionalServices: { ...formData.additionalServices, warranty: !!checked },
-                })
-              }
-            />
-            <label htmlFor="warranty" className="text-sm cursor-pointer">
-              Extended Warranty
-            </label>
-          </div>
+          {additionalServicesList.map((service) => (
+            <div key={service.id} className="flex items-center space-x-2">
+              <Checkbox
+                id={service.id}
+                checked={formData.additionalServices[service.key]}
+                onCheckedChange={(checked) =>
+                  updateFormData({
+                    additionalServices: {
+                      ...formData.additionalServices,
+                      [service.key]: !!checked,
+                    },
+                  })
+                }
+              />
+              <label 
+                htmlFor={service.id} 
+                className="text-sm cursor-pointer flex-1"
+              >
+                {service.label}
+                {service.description && (
+                  <span className="text-gray-500 text-xs ml-1">
+                    {service.description}
+                  </span>
+                )}
+              </label>
+            </div>
+          ))}
         </CardContent>
       </Card>
     </div>

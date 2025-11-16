@@ -5,7 +5,7 @@ import { Button } from "../components/ui/button";
 import { PipelineColumn } from "../components/sales-pipeline/PipelineColumn";
 import { PipelineFilters } from "../components/sales-pipeline/PipelineFilters";
 import { ConversionFunnel } from "../components/sales-pipeline/ConversionFunnel";
-import { PipelineOpportunity, PipelineStageData, PipelineMetrics, PipelineFilters as FilterType } from "../types/pipeline";
+import type { PipelineOpportunity, PipelineStageData, PipelineMetrics, PipelineFilters as FilterType } from "../types/pipeline";
 
 interface SalesPipelineProps {
   isWidget?: boolean;

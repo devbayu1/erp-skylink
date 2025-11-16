@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GripVertical, Clock, XCircle } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { PipelineOpportunity } from "../../types/pipeline";
+import type { PipelineOpportunity } from "../../types/pipeline";
 import { Badge } from "../ui/badge";
 
 interface PipelineCardProps {

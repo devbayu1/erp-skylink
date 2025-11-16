@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { QuotationFormData, Customer, ServiceType, ServicePlan } from "../types/quotationForm";
+import type { QuotationFormData, Customer, ServiceType, ServicePlan } from "../types/quotationForm";
 import { QuotationStep1 } from "../components/quotation-form/QuotationStep1";
 import { QuotationStep2 } from "../components/quotation-form/QuotationStep2";
 import { QuotationStep3 } from "../components/quotation-form/QuotationStep3";
@@ -61,6 +61,12 @@ export default function CreateQuotation() {
 
   const [formData, setFormData] = useState<QuotationFormData>({
     customer: null,
+    customerId: "",
+    customerName: "",
+    contactPerson: "",
+    phone: "",
+    email: "",
+    address: "",
     serviceType: "",
     servicePlan: "",
     quantity: 1,
@@ -70,10 +76,10 @@ export default function CreateQuotation() {
     longitude: "",
     targetRFSDate: "",
     additionalServices: [
-      { id: "1", name: "Delivery & Installation", checked: false },
-      { id: "2", name: "Activation Service", checked: false },
-      { id: "3", name: "Training & Support", checked: false },
-      { id: "4", name: "Extended Warranty", checked: false },
+      { id: "1", name: "Delivery & Installation", checked: false, delivery: true, activation: true, training: true, warranty: true },
+      { id: "2", name: "Activation Service", checked: false, delivery: true, activation: true, training: true, warranty: true },
+      { id: "3", name: "Training & Support", checked: false, delivery: true, activation: true, training: true, warranty: true },
+      { id: "4", name: "Extended Warranty", checked: false, delivery: true, activation: true, training: true, warranty: true },
     ],
     otcItems: [
       { id: "1", item: "Equipment", description: "", amount: 0 },
@@ -81,11 +87,10 @@ export default function CreateQuotation() {
       { id: "3", item: "Installation & Dismantle", description: "Professional installation", amount: 0 },
       { id: "4", item: "Activation", description: "Service activation", amount: 0 },
     ],
-    mrcItems: [
-      { id: "1", item: "Service Plan", description: "", monthly: 0, period: 12, total: 0 },
-    ],
+    mrcItems: [{ id: "1", item: "Service Plan", description: "", monthly: 0, period: 12, total: 0 }],
     paymentTerm: "postpaid",
     downPaymentPercent: 30,
+    // eslint-disable-next-line react-hooks/purity
     validUntil: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
     slaCommitments: ["99% Uptime Guarantee", "24/7 Support"],
     contractPeriod: 12,
@@ -119,12 +124,7 @@ export default function CreateQuotation() {
       {/* Page Header */}
       <div className="mb-6">
         <div className="flex items-center gap-4 mb-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-10 w-10 p-0"
-            onClick={handleCancel}
-          >
+          <Button variant="ghost" size="sm" className="h-10 w-10 p-0" onClick={handleCancel}>
             <ArrowLeft className="w-5 h-5 text-gray-600" />
           </Button>
 
@@ -138,47 +138,17 @@ export default function CreateQuotation() {
               <div className="flex items-center gap-3 flex-1">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                    currentStep > step.number
-                      ? "bg-green-500"
-                      : currentStep === step.number
-                      ? "bg-[#3b82f6]"
-                      : "bg-gray-300"
+                    currentStep > step.number ? "bg-green-500" : currentStep === step.number ? "bg-[#3b82f6]" : "bg-gray-300"
                   }`}
                 >
-                  {currentStep > step.number ? (
-                    <Check className="w-5 h-5 text-white" />
-                  ) : (
-                    <span className="text-white">{step.number}</span>
-                  )}
+                  {currentStep > step.number ? <Check className="w-5 h-5 text-white" /> : <span className="text-white">{step.number}</span>}
                 </div>
                 <div className="flex-1">
-                  <div
-                    className={`text-sm ${
-                      currentStep >= step.number
-                        ? "text-gray-900"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    Step {step.number}
-                  </div>
-                  <div
-                    className={`text-xs ${
-                      currentStep >= step.number
-                        ? "text-gray-600"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {step.title}
-                  </div>
+                  <div className={`text-sm ${currentStep >= step.number ? "text-gray-900" : "text-gray-500"}`}>Step {step.number}</div>
+                  <div className={`text-xs ${currentStep >= step.number ? "text-gray-600" : "text-gray-400"}`}>{step.title}</div>
                 </div>
               </div>
-              {index < steps.length - 1 && (
-                <div
-                  className={`h-0.5 flex-1 mx-2 ${
-                    currentStep > step.number ? "bg-green-500" : "bg-gray-300"
-                  }`}
-                />
-              )}
+              {index < steps.length - 1 && <div className={`h-0.5 flex-1 mx-2 ${currentStep > step.number ? "bg-green-500" : "bg-gray-300"}`} />}
             </div>
           ))}
         </div>
@@ -209,14 +179,7 @@ export default function CreateQuotation() {
           />
         )}
 
-        {currentStep === 3 && (
-          <QuotationStep3
-            formData={formData}
-            setFormData={setFormData}
-            onBack={handleBack}
-            onCancel={handleCancel}
-          />
-        )}
+        {currentStep === 3 && <QuotationStep3 formData={formData} setFormData={setFormData} onBack={handleBack} onCancel={handleCancel} />}
       </div>
     </div>
   );

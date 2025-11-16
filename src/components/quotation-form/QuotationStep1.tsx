@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { QuotationFormData, Customer, ServiceType, ServicePlan } from "../../types/quotationForm";
+import type { QuotationFormData, Customer, ServiceType, ServicePlan } from "../../types/quotationForm";
 
 interface QuotationStep1Props {
   formData: QuotationFormData;
