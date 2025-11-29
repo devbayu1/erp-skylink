@@ -24,6 +24,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "1",
     quotationNo: "PRT-JKT-QUOT-186-COM-4-2025",
+    siNumber: "SI-2025-005", // Nomor SI yang berelasi
     customerName: "Ibu Wulan",
     date: "2025-04-08",
     validUntil: "2025-04-15",
@@ -33,6 +34,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "2",
     quotationNo: "PRT-JKT-QUOT-185-COM-4-2025",
+    siNumber: "SI-2025-001", // Nomor SI yang berelasi
     customerName: "PT Buana Visualnet",
     date: "2025-04-05",
     validUntil: "2025-04-12",
@@ -42,6 +44,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "3",
     quotationNo: "PRT-JKT-QUOT-184-COM-3-2025",
+    siNumber: "SI-2025-002", // Nomor SI yang berelasi
     customerName: "Freyssinet Total",
     date: "2025-03-28",
     validUntil: "2025-04-04",
@@ -51,6 +54,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "4",
     quotationNo: "PRT-JKT-QUOT-183-COM-3-2025",
+    siNumber: "SI-2025-003", // Nomor SI yang berelasi (misalnya)
     customerName: "Diskominfo Muaro",
     date: "2025-03-25",
     validUntil: "2025-04-01",
@@ -60,6 +64,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "5",
     quotationNo: "PRT-JKT-QUOT-182-COM-3-2025",
+    siNumber: "SI-2025-004", // Nomor SI yang berelasi (misalnya)
     customerName: "PT Global Networks",
     date: "2025-03-20",
     validUntil: "2025-03-27",
@@ -69,6 +74,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "6",
     quotationNo: "PRT-JKT-QUOT-181-COM-3-2025",
+    siNumber: "SI-2025-001", // Duplikasi relasi SI
     customerName: "CV Maju Teknologi",
     date: "2025-03-18",
     validUntil: "2025-03-25",
@@ -78,6 +84,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "7",
     quotationNo: "PRT-JKT-QUOT-180-COM-2-2025",
+    siNumber: "SI-2025-002", // Duplikasi relasi SI
     customerName: "PT Digital Prima",
     date: "2025-03-15",
     validUntil: "2025-03-15",
@@ -87,6 +94,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "8",
     quotationNo: "PRT-JKT-QUOT-179-COM-2-2025",
+    siNumber: "SI-2025-003", // Duplikasi relasi SI
     customerName: "Kementerian PUPR",
     date: "2025-03-10",
     validUntil: "2025-03-17",
@@ -96,6 +104,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "9",
     quotationNo: "PRT-JKT-QUOT-178-COM-2-2025",
+    siNumber: "SI-2025-004", // Duplikasi relasi SI
     customerName: "PT Telkom Regional",
     date: "2025-03-05",
     validUntil: "2025-03-12",
@@ -105,6 +114,7 @@ const mockQuotations: Quotation[] = [
   {
     id: "10",
     quotationNo: "PRT-JKT-QUOT-177-COM-2-2025",
+    siNumber: "SI-2025-005", // Duplikasi relasi SI
     customerName: "Bank Mandiri Cab. Jambi",
     date: "2025-03-01",
     validUntil: "2025-03-08",
@@ -143,6 +153,10 @@ export function QuotationTable() {
     navigate(`/quotations/${quotationId}`);
   };
 
+  const handleViewSi = () => {
+    navigate(`/sales/si/1`);
+  };
+
   const handleEdit = (quotationId: string) => {
     navigate(`/quotations/${quotationId}/edit`);
   };
@@ -162,6 +176,12 @@ export function QuotationTable() {
               <TableHead className="w-[280px]">
                 <div className="flex items-center gap-2 cursor-pointer">
                   Quotation No.
+                  <ArrowUpDown className="w-4 h-4 text-gray-400" />
+                </div>
+              </TableHead>
+              <TableHead className="w-[280px]">
+                <div className="flex items-center gap-2 cursor-pointer">
+                  SI No.
                   <ArrowUpDown className="w-4 h-4 text-gray-400" />
                 </div>
               </TableHead>
@@ -211,6 +231,14 @@ export function QuotationTable() {
                       className="text-[#3b82f6] hover:underline text-sm"
                     >
                       {quotation.quotationNo}
+                    </button>
+                  </TableCell>
+                  <TableCell>
+                    <button
+                      onClick={() => handleViewSi()}
+                      className="text-[#3b82f6] hover:underline text-sm"
+                    >
+                      {quotation.siNumber}
                     </button>
                   </TableCell>
                   <TableCell className="text-gray-900">

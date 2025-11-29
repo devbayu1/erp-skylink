@@ -28,7 +28,7 @@ export default function Quotations() {
         </div>
 
         {/* Title and Button */}
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <h1 className="text-gray-900">Sales & Quotation</h1>
           <Button
             onClick={() => navigate("/quotations/new")}
@@ -37,7 +37,7 @@ export default function Quotations() {
             <Plus className="w-4 h-4" />
             Create New Quotation
           </Button>
-        </div>
+        </div> */}
       </div>
 
       {/* Metrics Row */}

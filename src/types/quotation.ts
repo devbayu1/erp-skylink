@@ -1,5 +1,6 @@
 export interface Quotation {
   id: string;
+  siNumber: string;
   quotationNo: string;
   customerName: string;
   date: string;

@@ -229,10 +229,10 @@ export default function QuotationDetail() {
               <Printer className="w-4 h-4" />
               Print
             </Button>
-            <Button onClick={() => navigate(`/quotations/${id}/si`)}>
+            {/* <Button onClick={() => navigate(`/quotations/${id}/si`)}>
               <FileText className="w-4 h-4 mr-2" />
               Create SI
-            </Button>
+            </Button> */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="h-9 w-9 p-0">
