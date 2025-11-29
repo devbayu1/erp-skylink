@@ -24,10 +24,10 @@ export function Sidebar() {
   const [expandedMenus, setExpandedMenus] = useState<string[]>(["/sales"]);
 
   const rolePermissions: Record<string, string[]> = {
-    sales: ["/customers", "/sales", "/quotations", "/orders/iro"],
+    sales: ["/customers", "/sales", "/quotations", "/orders"],
     legal: ["/verification", "/legal-review", "/orders/form-berlangganan", "/orders/pks"],
-    procurement: ["/procurement"],
-    inventory: ["/inventory"],
+    procurement: ["/procurement", "/inventory"],
+    inventory: ["/procurement", "/inventory"],
     installation: ["/iwo", "/deployment", "/bast"],
     finance: ["/invoices", "/po", "/billing"],
     admin: ["*"],
