@@ -85,6 +85,7 @@ import RecurringBillingForm from "./pages/billing/RecurringBillingForm";
 import RecurringBillingDetail from "./pages/billing/RecurringBillingDetail";
 import RecurringBillingScheduler from "./pages/billing/RecurringBillingScheduler";
 import { AuthProvider } from "./context/AuthContext";
+import DocViewer from "./pages/DocViewer";
 
 function App() {
   return (
@@ -225,6 +226,8 @@ function App() {
                 <Route path="/billing/:id" element={<RecurringBillingDetail />} />
                 <Route path="/billing/:id/edit" element={<RecurringBillingForm />} />
                 <Route path="/billing/scheduler" element={<RecurringBillingScheduler />} />
+
+                <Route path="/docs/:docName" element={<DocViewer />} />
               </Routes>
             </main>
           </div>

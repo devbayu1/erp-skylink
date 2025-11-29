@@ -24,34 +24,12 @@ export function Sidebar() {
   const [expandedMenus, setExpandedMenus] = useState<string[]>(["/sales"]);
 
   const rolePermissions: Record<string, string[]> = {
-    sales: [
-      "/customers",
-      "/sales",
-      "/quotations",
-      "/orders/iro",
-    ],
-    legal: [
-      "/verification",
-      "/legal-review",
-      "/orders/form-berlangganan",
-      "/orders/pks",
-    ],
-    procurement: [
-      "/procurement",
-    ],
-    inventory: [
-      "/inventory",
-    ],
-    installation: [
-      "/iwo",
-      "/deployment",
-      "/bast",
-    ],
-    finance: [
-      "/invoices",
-      "/po",
-      "/billing",
-    ],
+    sales: ["/customers", "/sales", "/quotations", "/orders/iro"],
+    legal: ["/verification", "/legal-review", "/orders/form-berlangganan", "/orders/pks"],
+    procurement: ["/procurement"],
+    inventory: ["/inventory"],
+    installation: ["/iwo", "/deployment", "/bast"],
+    finance: ["/invoices", "/po", "/billing"],
     admin: ["*"],
   };
 
@@ -91,7 +69,7 @@ export function Sidebar() {
       ],
     },
 
-    { name: "IRO Approval", path: "/iro-approval", icon: CheckCircle },
+    // { name: "IRO Approval", path: "/iro-approval", icon: CheckCircle },
 
     {
       name: "Procurement",
@@ -159,6 +137,20 @@ export function Sidebar() {
       icon: ChartBar,
       subMenu: [{ name: "Dashboard", path: "/sla" }],
     },
+    {
+      name: "Documentation",
+      path: "/docs",
+      icon: FileText,
+      subMenu: [
+        { name: "End-to-End Manual", path: "/docs/01_END_TO_END_USER_MANUAL" },
+        // { name: "Sales User Guide", path: "/docs/02_Sales_User_Guide" },
+        // { name: "Sales Ops Guide", path: "/docs/03_SalesOps_OrderManagement_User_Guide" },
+        // { name: "Procurement Guide", path: "/docs/04_Procurement_User_Guide" },
+        // { name: "Warehouse Guide", path: "/docs/05_Warehouse_Inventory_User_Guide" },
+        // { name: "Deployment Guide", path: "/docs/06_Technical_Deployment_User_Guide" },
+        // { name: "Finance Guide", path: "/docs/07_Finance_User_Guide" },
+      ],
+    },
   ];
 
   // ================================================================
@@ -177,12 +169,7 @@ export function Sidebar() {
 
   const isActive = (path: string) => location.pathname.startsWith(path);
 
-  const toggleMenu = (path: string) =>
-    setExpandedMenus((prev) =>
-      prev.includes(path)
-        ? prev.filter((p) => p !== path)
-        : [...prev, path]
-    );
+  const toggleMenu = (path: string) => setExpandedMenus((prev) => (prev.includes(path) ? prev.filter((p) => p !== path) : [...prev, path]));
 
   return (
     <aside className="w-60 bg-gray-50 border-r border-gray-200 fixed h-full overflow-y-auto shadow-sm">
@@ -204,28 +191,20 @@ export function Sidebar() {
                 <button
                   onClick={() => toggleMenu(item.path)}
                   className={`w-full flex items-center justify-between px-4 py-3 rounded-lg ${
-                    active
-                      ? "bg-blue-50 text-blue-700 font-semibold"
-                      : "hover:bg-gray-100 text-gray-700"
+                    active ? "bg-blue-50 text-blue-700 font-semibold" : "hover:bg-gray-100 text-gray-700"
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <Icon className="w-5 h-5" />
                     <span>{item.name}</span>
                   </div>
-                  {expanded ? (
-                    <ChevronDown className="w-4 h-4" />
-                  ) : (
-                    <ChevronRight className="w-4 h-4" />
-                  )}
+                  {expanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                 </button>
               ) : (
                 <Link
                   to={item.path}
                   className={`flex items-center px-4 py-3 rounded-lg ${
-                    active
-                      ? "bg-blue-50 text-blue-700 font-semibold border-l-4 border-blue-700 -ml-4 pl-4"
-                      : "hover:bg-gray-100 text-gray-700"
+                    active ? "bg-blue-50 text-blue-700 font-semibold border-l-4 border-blue-700 -ml-4 pl-4" : "hover:bg-gray-100 text-gray-700"
                   }`}
                 >
                   <Icon className="w-5 h-5 mr-3" />
