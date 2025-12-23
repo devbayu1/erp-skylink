@@ -177,18 +177,7 @@ export default function IRODetail() {
             )}
           </div>
 
-          {/* NEXT STEP */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="font-semibold text-lg mb-3">Next Step</h2>
-
-            <Link
-              to={`/orders/iro/${iro.id}/form-berlangganan/new`}
-              className="flex items-center justify-between px-4 py-3 border rounded-lg hover:bg-gray-50"
-            >
-              <span>Create Form Berlangganan</span>
-              <ChevronRight />
-            </Link>
-          </div>
+          
         </div>
       </div>
     </div>
