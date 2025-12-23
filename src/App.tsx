@@ -108,61 +108,79 @@ function App() {
                 <Route path="/customers/:id" element={<CustomerDetail />} />
                 <Route path="/customers/new" element={<CustomerFormPage />} />
                 <Route path="/customers/:id/edit" element={<CustomerFormPage />} />
+                
                 {/* Sales & Quotation Routes - NEW ORDER */}
                 <Route path="/sales/si" element={<SiteInvestmentList />} /> {/* List SI */}
                 <Route path="/sales/si/new" element={<SiteInvestmentForm />} /> {/* Create SI */}
                 <Route path="/sales/si/:id" element={<SiteInvestmentDetail />} />
                 <Route path="/sales/si/:id/edit" element={<SiteInvestmentForm />} /> {/* Edit SI */}
                 <Route path="/sales/si/:id/quotation" element={<CreateQuotation />} /> {/* Create Quotation from SI */}
+                
                 {/* Placeholder routes - will be created later */}
                 <Route path="/quotations" element={<Quotations />} />
                 <Route path="/quotations/new" element={<CreateQuotation />} />
                 <Route path="/quotations/:id" element={<QuotationDetail />} />
                 <Route path="/sales/pipeline" element={<SalesPipeline />} />
+                
                 {/* ========================= */}
-                {/* IRO ROUTES */}
+                {/* LEGAL REVIEW ROUTES (Updated Flow) */}
                 {/* ========================= */}
-                <Route path="/orders/iro" element={<IROList />} />
-                <Route path="/orders/iro/new" element={<IROForm />} />
-                <Route path="/orders/iro/:id" element={<IRODetail />} />
-                <Route path="/orders/iro/:id/edit" element={<IROForm />} />
                 <Route path="/legal-review" element={<LegalReviewList />} />
                 <Route path="/legal-review/:id" element={<LegalReviewDetail />} />
-                <Route path="/legal-review/iro/:iroId" element={<LegalReviewForm />} />
+                {/* REVISI: Menggunakan /new agar bisa menerima param ?quotationId=... */}
+                <Route path="/legal-review/new" element={<LegalReviewForm />} /> 
+                <Route path="/legal-review/:id/edit" element={<LegalReviewForm />} /> 
+                <Route path="/verification" element={<VerificationList />} />
+                <Route path="/verification/new" element={<VerificationForm />} />
+                <Route path="/verification/:id" element={<VerificationDetail />} />
+                <Route path="/verification/:id/edit" element={<VerificationForm />} />
+
                 {/* ========================= */}
-                {/* FORM BERLANGGANAN */}
+                {/* FORM BERLANGGANAN (Updated Flow) */}
                 {/* ========================= */}
-                <Route path="/orders/iro/:id/form-berlangganan/new" element={<FormBerlanggananForm />} />
+                {/* REVISI: Jalur ini dipindah menjadi top-level, tidak lagi nested di bawah IRO */}
+                <Route path="/orders/form-berlangganan/new" element={<FormBerlanggananForm />} />
                 <Route path="/orders/form-berlangganan" element={<FormBerlanggananList />} />
                 <Route path="/orders/form-berlangganan/:id" element={<FormBerlanggananDetail />} />
                 <Route path="/orders/form-berlangganan/:id/edit" element={<FormBerlanggananForm />} />
+                
                 {/* ========================= */}
-                {/* PKS */}
+                {/* PKS (Dependant on Form Berlangganan) */}
                 {/* ========================= */}
                 <Route path="/orders/form-berlangganan/:id/pks/new" element={<PKSForm />} />
                 <Route path="/orders/pks" element={<PKSList />} />
                 <Route path="/orders/pks/:id" element={<PKSDetail />} />
                 <Route path="/orders/pks/:id/edit" element={<PKSForm />} />
+                
                 {/* ========================= */}
-                {/* KOM */}
+                {/* KOM (Dependant on PKS) */}
                 {/* ========================= */}
                 <Route path="/orders/pks/:id/kom/new" element={<KOMForm />} />
                 <Route path="/orders/kom" element={<KOMList />} />
                 <Route path="/orders/kom/:id" element={<KOMDetail />} />
-                {/* Verification routes */}
-                <Route path="/verification" element={<VerificationList />} />
-                <Route path="/verification/new" element={<VerificationForm />} />
-                <Route path="/verification/:id" element={<VerificationDetail />} />
-                <Route path="/verification/:id/edit" element={<VerificationForm />} />
+                
+                {/* ========================= */}
+                {/* IRO ROUTES (Final Step) */}
+                {/* ========================= */}
+                <Route path="/orders/iro" element={<IROList />} />
+                {/* IRO sekarang dibuat di akhir, bisa menerima param ?komId=... */}
+                <Route path="/orders/iro/new" element={<IROForm />} />
+                <Route path="/orders/iro/:id" element={<IRODetail />} />
+                <Route path="/orders/iro/:id/edit" element={<IROForm />} />
+                
+                {/* IRO Approval & Others */}
                 <Route path="/iro-approval" element={<IROApprovalList />} />
                 <Route path="/iro-approval/:id" element={<IROApprovalDetail />} />
                 <Route path="/iro-approval/:id/approve" element={<IROApprovalAction />} />
+
+                {/* Finance */}
                 <Route path="/invoices" element={<InvoiceList />} />
                 <Route path="/invoices/new" element={<InvoiceForm />} />
                 <Route path="/invoices/:id" element={<InvoiceDetail />} />
                 <Route path="/invoices/:id/payments" element={<InvoicePayments />} />
                 <Route path="/invoices/:id/history" element={<InvoiceHistory />} />
                 <Route path="/invoices/generate/:pksId" element={<InvoiceGenerate />} />
+                
                 {/* Procurement */}
                 <Route path="/procurement/mgrf" element={<MGRFList />} />
                 <Route path="/procurement/mgrf/new" element={<MGRFForm />} />
@@ -188,6 +206,7 @@ function App() {
                 <Route path="/procurement/grn/new" element={<GRNForm />} />
                 <Route path="/procurement/grn/:id" element={<GRNDetail />} />
                 <Route path="/procurement/grn/:id/edit" element={<GRNForm />} />
+                
                 {/* Inventory / Asset Registration */}
                 <Route path="/inventory/assets" element={<AssetList />} />
                 <Route path="/inventory/assets/new" element={<AssetForm />} />
@@ -198,6 +217,8 @@ function App() {
                 <Route path="/inventory/movements/:id" element={<MovementDetail />} />
                 <Route path="/inventory/movements/:id/edit" element={<MovementForm />} />
                 <Route path="/inventory/movements/:id/complete" element={<MovementForm />} />
+                
+                {/* Technical / Installation */}
                 <Route path="/iwo" element={<IWOList />} />
                 <Route path="/iwo/new" element={<IWOForm />} />
                 <Route path="/iwo/:id" element={<IWODetail />} />
@@ -206,21 +227,24 @@ function App() {
                 <Route path="/deployment/new" element={<DeploymentForm />} />
                 <Route path="/deployment/:id" element={<DeploymentDetail />} />
                 <Route path="/deployment/:id/verify" element={<DeploymentVerify />} />
+                
                 {/* BAST */}
                 <Route path="/bast" element={<BASTList />} />
                 <Route path="/bast/new" element={<BASTForm />} />
                 <Route path="/bast/:id" element={<BASTDetail />} />
                 <Route path="/bast/:id/edit" element={<BASTForm />} />
+                
                 {/* SLA Monitoring */}
                 <Route path="/sla" element={<SLADashboard />} />
                 <Route path="/sla/:id/logs" element={<SLALogList />} />
                 <Route path="/sla/:id/logs/new" element={<SLALogForm />} />
                 <Route path="/sla/log/:id" element={<SLALogDetail />} />
                 <Route path="/sla/log/:id/edit" element={<SLALogForm />} />
+                
+                {/* PO & Billing */}
                 <Route path="/po" element={<CustomerPOList />} />
                 <Route path="/po/new" element={<CustomerPOForm />} />
                 <Route path="/po/:id" element={<CustomerPODetail />} />
-                {/* // billing routes (add to your <Routes>)*/}
                 <Route path="/billing" element={<RecurringBillingList />} />
                 <Route path="/billing/new" element={<RecurringBillingForm />} />
                 <Route path="/billing/:id" element={<RecurringBillingDetail />} />

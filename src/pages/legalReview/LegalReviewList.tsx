@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import dummyLegalReview from "@/data/dummyLegalReview";
+import { Button } from "@/components/ui/button";
 
 export default function LegalReviewList() {
   return (
@@ -40,8 +41,11 @@ export default function LegalReviewList() {
                   </span>
                 </td>
                 <td className="p-3 text-center">
-                  <Link to={`/legal-review/${row.id}`} className="text-blue-600 underline">
+                  <Link to={`/legal-review/${row.id}`} className="text-blue-600 underline me-2">
                     View
+                  </Link>
+                  <Link to={`/legal-review/${row.id}/edit`} className="text-blue-600 underline me-2">
+                    Edit
                   </Link>
                 </td>
               </tr>

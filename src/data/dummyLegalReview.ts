@@ -3,6 +3,8 @@ const dummyLegalReview = [
     id: "LR-001",
     iroId: "1",
     iroNumber: "PRT.HO-JKT-257-OPS-10-2025",
+    quotationId: "Q-001", 
+    quotationNumber: "PRT-JKT-QUOT-186-COM-4-2025",
 
     customerName: "PT Buana Visualnet Sentra",
     serviceType: "Starlink Standard V4 - Priority 2TB",

@@ -12,6 +12,7 @@ const dummyQuotations = [
     serviceType: "Starlink Standard V4 - Priority 2TB",
     servicePlan: "Priority 2TB",
     quantity: 1,
+    installationLocation: '',
   },
   {
     id: "Q-002",
@@ -25,6 +26,7 @@ const dummyQuotations = [
     serviceType: "Starlink Standard V4 - Priority 500GB",
     servicePlan: "Standard 500GB",
     quantity: 1,
+    installationLocation: '',
   },
 ];
 

@@ -11,17 +11,16 @@ import {
   FileText,
   ChevronDown,
   ChevronRight,
-  CheckCircle,
   BoxIcon,
   Wrench,
   PackageCheck,
   ChartBar,
-} from "lucide-react";
+} from "lucide-react"; // Hapus import yang tidak terpakai
 
 export function Sidebar() {
   const { role } = useAuth();
   const location = useLocation();
-  const [expandedMenus, setExpandedMenus] = useState<string[]>(["/sales"]);
+  const [expandedMenus, setExpandedMenus] = useState<string[]>(["/sales", "/orders"]); // Default expand Orders juga
 
   const rolePermissions: Record<string, string[]> = {
     sales: ["/customers", "/sales", "/quotations", "/orders"],
@@ -50,26 +49,34 @@ export function Sidebar() {
       subMenu: [
         { name: "Customers", path: "/customers" },
         { name: "Site Investment (SI)", path: "/sales/si" },
-        { name: "Quotations", path: "/quotations" },
+        { name: "Quotations", path: "/quotations" }, // Step 1 Flow
         { name: "Sales Pipeline", path: "/sales/pipeline" },
       ],
     },
 
     {
-      name: "Order Management",
+      name: "Order Processing", // Ganti nama agar lebih relevan (Opsional)
       path: "/orders",
       icon: ClipboardList,
       subMenu: [
-        { name: "IRO", path: "/orders/iro" },
-        { name: "Customer Legal Verification", path: "/verification" },
+        // URUTAN BARU SESUAI FLOW:
+        // 1. Legal Review (Masuk setelah Quotation Approved)
         { name: "Legal–Technical Review", path: "/legal-review" },
+
+        // 2. Administrasi (FB & PKS)
         { name: "Form Berlangganan", path: "/orders/form-berlangganan" },
-        { name: "PKS", path: "/orders/pks" },
+        { name: "PKS (Contracts)", path: "/orders/pks" },
+
+        // 3. Kick-Off Meeting
         { name: "KOM Schedule", path: "/orders/kom" },
+
+        // 4. IRO (Output Akhir ke Tim Teknis)
+        { name: "Internal Request Order (IRO)", path: "/orders/iro" },
+
+        // Menu tambahan/support
+        { name: "Customer Legal Verification", path: "/verification" },
       ],
     },
-
-    // { name: "IRO Approval", path: "/iro-approval", icon: CheckCircle },
 
     {
       name: "Procurement",
@@ -143,12 +150,6 @@ export function Sidebar() {
       icon: FileText,
       subMenu: [
         { name: "End-to-End Manual", path: "/docs/01_END_TO_END_USER_MANUAL" },
-        // { name: "Sales User Guide", path: "/docs/02_Sales_User_Guide" },
-        // { name: "Sales Ops Guide", path: "/docs/03_SalesOps_OrderManagement_User_Guide" },
-        // { name: "Procurement Guide", path: "/docs/04_Procurement_User_Guide" },
-        // { name: "Warehouse Guide", path: "/docs/05_Warehouse_Inventory_User_Guide" },
-        // { name: "Deployment Guide", path: "/docs/06_Technical_Deployment_User_Guide" },
-        // { name: "Finance Guide", path: "/docs/07_Finance_User_Guide" },
       ],
     },
   ];
@@ -168,7 +169,6 @@ export function Sidebar() {
     .filter(Boolean);
 
   const isActive = (path: string) => location.pathname.startsWith(path);
-
   const toggleMenu = (path: string) => setExpandedMenus((prev) => (prev.includes(path) ? prev.filter((p) => p !== path) : [...prev, path]));
 
   return (

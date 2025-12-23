@@ -15,6 +15,7 @@ import {
   Upload,
   Clock,
   CheckCircle,
+  Scale,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -211,12 +212,23 @@ export default function QuotationDetail() {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
+            {/* Tombol Khusus Flow Baru */}
+            {mockQuotation.status === "sent" && (
+              <Button
+                onClick={() => navigate(`/legal-review/new?quotationId=${id}`)}
+                className="bg-blue-600 hover:bg-blue-700 text-white gap-2 shadow-sm"
+              >
+                <Scale className="w-4 h-4" /> {/* Pastikan import icon Scale dari lucide-react */}
+                Submit Legal Review
+              </Button>
+            )}
             {(mockQuotation.status === "draft" || mockQuotation.status === "sent") && (
               <Button variant="outline" size="sm" onClick={handleEdit} className="gap-2">
                 <Pencil className="w-4 h-4" />
                 Edit
               </Button>
             )}
+            
             <Button variant="outline" size="sm" onClick={handleDownloadPDF} className="gap-2">
               <Download className="w-4 h-4" />
               Download PDF

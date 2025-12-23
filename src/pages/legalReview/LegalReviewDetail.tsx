@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import dummyLegalReview from "@/data/dummyLegalReview";
+import { Button } from "@/components/ui/button";
 
 export default function LegalReviewDetail() {
   const { id } = useParams();
@@ -23,10 +24,7 @@ export default function LegalReviewDetail() {
         <ul className="list-disc ml-5 text-sm">
           {entries.map(([key, val]) => (
             <li key={key}>
-              {key}:{" "}
-              <span className={val ? "text-green-600" : "text-red-600"}>
-                {val ? "Checked" : "Not Checked"}
-              </span>
+              {key}: <span className={val ? "text-green-600" : "text-red-600"}>{val ? "Checked" : "Not Checked"}</span>
             </li>
           ))}
         </ul>
@@ -44,11 +42,11 @@ export default function LegalReviewDetail() {
         <h2 className="font-medium mt-4">Status</h2>
         <p>{review.status}</p>
 
-        <Link
-          to={`/legal-review/${review.iroId}/edit`}
-          className="text-blue-600 underline mt-4 inline-block"
-        >
+        <Link to={`/legal-review/${review.iroId}/edit`} className="text-blue-600 underline mt-4 inline-block me-2">
           Edit Review
+        </Link>
+        <Link to={`/orders/form-berlangganan/new?legalReviewId=${review.id}`} className="text-blue-600 underline mt-4 inline-block">
+          Proceed to FB
         </Link>
       </div>
     </div>
